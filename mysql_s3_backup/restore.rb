@@ -40,17 +40,6 @@ begin
   cmd += " #{@mysql_database}"
   run cmd
   
-  # download the binary log files
-  retrieve_files("mysql-bin.", @temp_dir)
-  logs = Dir.glob("#{@temp_dir}/mysql-bin.[0-9]*").sort
-  
-  # restore the binary log files
-  logs.each do |log|
-    # The following will be executed for each binary log file
-    cmd = "mysqlbinlog --database=#{@mysql_database} #{log} | mysql -u#{@mysql_user} "
-    cmd += " -p'#{@mysql_password}' " unless @mysql_password.nil?
-    run cmd
-  end
 ensure
   FileUtils.rm_rf(@temp_dir)
 end

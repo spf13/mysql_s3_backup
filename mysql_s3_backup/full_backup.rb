@@ -2,11 +2,14 @@
 
 require "common"
 
+def delete_old_backups(file_name)
+  S3Object.delete file_name, @s3_bucket
+end
+
 begin
   FileUtils.mkdir_p @temp_dir
 
-  # assumes the bucket's empty
-  dump_file = "#{@temp_dir}/dump.sql.gz"
+  dump_file = "#{@temp_dir}/#{Date.today.to_s}dump.sql.gz"
   
   cmd = "mysqldump --quick --single-transaction --create-options -u#{@mysql_user}  --flush-logs --master-data=2 --delete-master-logs"
   cmd += " -p'#{@mysql_password}'" unless @mysql_password.nil?
@@ -14,6 +17,8 @@ begin
   run(cmd)
   
   AWS::S3::S3Object.store(File.basename(dump_file), open(dump_file), @s3_bucket)
+  
+  delete_old_backup((Date.today - (@backups_to_keep * @backup_runs_every)).to_s)
 ensure
   FileUtils.rm_rf(@temp_dir)
 end

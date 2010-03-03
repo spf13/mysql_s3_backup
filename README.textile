@@ -1,6 +1,7 @@
-h3. Code examples from Paul Dowman's blog
+h3. Backing up your MySQL database to S3
 
-These are the code examples for my blog posts which are available at "http://pauldowman.com/":http://pauldowman.com/
+This is a fork of the code examples for the blog post available at "http://pauldowman.com/2009/02/08/mysql-s3-backup/":http://pauldowman.com/2009/02/08/mysql-s3-backup/
+I have modified these examples for my own use.  I have removed the incremental backup because I don't need it and I have added the ability to specify how many backups to keep in s3 in the config.rb.
 
 Copyright 2009 Paul Dowman, "http://pauldowman.com/":http://pauldowman.com/
 

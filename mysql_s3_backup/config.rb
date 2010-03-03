@@ -6,3 +6,5 @@
 @aws_secret_access_key = "your-aws-secret-access-key-id"
 @mysql_bin_log_dir = "/var/lib/mysql/binlog"
 @temp_dir = "/tmp/mysql-backup"
+@backups_to_keep = 2
+@backup_runs_every = 7 #days
