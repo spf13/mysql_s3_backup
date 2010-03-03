@@ -7,7 +7,7 @@ begin
 
   dump_file = "#{@temp_dir}/#{Date.today.to_s}.dump.sql.gz"
   
-  cmd = "mysqldump --quick --single-transaction --create-options -u#{@mysql_user}  --flush-logs --master-data=2 --delete-master-logs"
+  cmd = "mysqldump -u#{@mysql_user}"
   cmd += " -p'#{@mysql_password}'" unless @mysql_password.nil?
   cmd += " #{@mysql_database} | gzip > #{dump_file}"
   run(cmd)
