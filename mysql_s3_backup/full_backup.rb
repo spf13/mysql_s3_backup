@@ -13,7 +13,7 @@ begin
   run(cmd)
   
   AWS::S3::S3Object.store(File.basename(dump_file), open(dump_file), @s3_bucket)
-  AWS::S3::S3Object.delete((Date.today - (@backups_to_keep * @backup_runs_every)).to_s, @s3_bucket)
+  AWS::S3::S3Object.delete("#{(Date.today - (@backups_to_keep * @backup_runs_every)).to_s}.dump.sql.gz", @s3_bucket)
 ensure
   FileUtils.rm_rf(@temp_dir)
 end
