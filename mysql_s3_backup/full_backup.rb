@@ -5,7 +5,7 @@ require "common"
 begin
   FileUtils.mkdir_p @temp_dir
 
-  dump_file = "#{@temp_dir}/#{Date.today.to_s}dump.sql.gz"
+  dump_file = "#{@temp_dir}/#{Date.today.to_s}.dump.sql.gz"
   
   cmd = "mysqldump --quick --single-transaction --create-options -u#{@mysql_user}  --flush-logs --master-data=2 --delete-master-logs"
   cmd += " -p'#{@mysql_password}'" unless @mysql_password.nil?
