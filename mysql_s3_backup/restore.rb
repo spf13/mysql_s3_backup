@@ -37,6 +37,7 @@ begin
   # restore the dump file
   cmd = "gunzip -c #{file} | mysql -u#{@mysql_user} "
   cmd += " -p'#{@mysql_password}' " unless @mysql_password.nil?
+  cmd += " --host=#{@mysql_host}"
   cmd += " #{@mysql_database}"
   run cmd
   

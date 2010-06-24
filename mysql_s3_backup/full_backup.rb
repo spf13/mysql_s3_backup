@@ -9,6 +9,7 @@ begin
   
   cmd = "mysqldump -u#{@mysql_user}"
   cmd += " -p'#{@mysql_password}'" unless @mysql_password.nil?
+  cmd += " --host=#{@mysql_host}"
   cmd += " #{@mysql_database} | gzip > #{dump_file}"
   run(cmd)
   
